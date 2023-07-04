@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JENKINS CONNECTOR</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  
+  <script src="https://res.cdn.office.net/teams-js/2.2.0/js/MicrosoftTeams.min.js"
+    integrity="sha384-yBjE++eHeBPzIg+IKl9OHFqMbSdrzY2S/LW3qeitc5vqXewEYRWegByWzBN/chRh" crossorigin="anonymous">
+    </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="module" src="./formLogic.mjs"> </script>
+  <script>
+    microsoftTeams.app.initialize().then(console.log("Promise from Teams app init call resolved"));
+  </script>
+  <style>
+    .dialog-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      animation: slide-in 0.3s ease-in-out;
+    }
+
+    .dialog-container.show {
+      display: block;
+    }
+
+    .tick-animation {
+      margin-bottom: 10px;
+      font-size: 36px;
+      color: #6265A6;
+      animation: tick-scale 0.5s ease-in-out;
+    }
+
+    @keyframes slide-in {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @keyframes tick-scale {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <form id="sampleForm"
+    style="max-width: 500px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 5px;">
+
+    <h1 style="text-align: center; font-weight: 500; font-size: x-large; margin-bottom: 20px;">Jenkins Actions</h1>
+    <div id="clusterName" style="margin-bottom: 20px;">
+
+    </div>
+
+    <label style="display: block; font-weight: 100; margin-bottom: 20px;">
+      Select Command 
+      <select name="command" id="command"
+        style="width: 100%; padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="noCommand">Select</option>
+        <option value="clusterHealth">Cluster Health</option>
+        <option value="jStack">JStack</option>
+      </select>
+    </label>
+
+    <div id="form-components" style="margin-bottom: 20px;">
+
+    </div>
+
+    <div>
+      <button type="submit" class="btn-submit" id="btnSubmit" disabled
+        style="width: 100%; padding: 10px; background-color: #6265A6; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+        Submit
+      </button>
+    </div>
+
+  </form>
+
+  <div id="dialog" class="dialog-container">
+    <div class="tick-animation">&#10004;</div>
+    <div>Your query has been submitted!</div>
+  </div>
+
+  <script>
+    document.getElementById('sampleForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent form submission
+
+      var dialog = document.getElementById('dialog');
+      dialog.classList.add('show');
+
+      setTimeout(function () {
+        dialog.classList.remove('show');
+      }, 5000); // Hide dialog after 3 seconds
+    });
+  </script>
+
+
+</body>
+
+</html>

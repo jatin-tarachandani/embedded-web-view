@@ -1,0 +1,18 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+label {
+    font-weight: lighter;
+    font-size: 0.89em;
+}
+
+input {
+    background-color: #f5f5f5;
+    box-sizing: content-box;
+}
+
+select {
+    background-color: #f5f5f5;
+    box-sizing: content-box;
+}
